@@ -1,4 +1,6 @@
-# ISOTOPE
+<p align="center">
+<img width="400" alt="isotope_logo" src="https://github.com/user-attachments/assets/d590bcb2-3c62-458e-8260-6c53771d1908" />
+<br>
 
 ## Intelligent System for Optimal Transport and Operations of Power Elements
 
