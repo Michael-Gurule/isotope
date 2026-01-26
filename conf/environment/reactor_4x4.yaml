@@ -1,0 +1,23 @@
+# Small 4x4 reactor core for debugging and curriculum stage 1
+name: "reactor_4x4"
+grid_size: 4
+max_steps: 50
+
+# Agent Configuration
+num_agents: 1
+agent_assignment: "single"  # Single agent controls entire grid
+
+# Fuel Assembly Inventory (scaled down)
+fuel_inventory:
+  fresh_enrichment: 0.05
+  fresh_count: 6
+  used_enrichment: 0.03
+  used_count: 5
+  used_burnup_min: 10000.0
+  used_burnup_max: 25000.0
+  depleted_enrichment: 0.01
+  depleted_count: 5
+  depleted_burnup_min: 30000.0
+  depleted_burnup_max: 45000.0
+
+# Total: 16 assemblies for 4x4 grid
