@@ -1,0 +1,30 @@
+# Independent PPO Configuration (shared weights)
+name: "independent_ppo"
+algorithm: "PPO"
+architecture: "independent"
+
+# Network Architecture
+network:
+  hidden_dims: [256, 128]
+  activation: "relu"
+  share_weights: true  # All agents share policy weights
+
+# PPO Hyperparameters
+hyperparameters:
+  lr: 3.0e-4
+  lr_schedule: "linear"
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_epsilon: 0.2
+  clip_value: true
+  value_clip_epsilon: 0.2
+  entropy_coef: 0.01
+  value_coef: 0.5
+  max_grad_norm: 0.5
+  normalize_advantages: true
+  normalize_rewards: true
+
+# Memory/Buffer
+buffer:
+  size: 2048
+  minibatch_size: 64
