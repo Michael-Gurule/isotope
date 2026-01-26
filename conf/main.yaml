@@ -1,0 +1,68 @@
+defaults:
+  - _self_
+  - environment: reactor_8x8
+  - agent: mappo_hierarchical
+  - physics: toy_diffusion
+  - curriculum: progressive_grid
+  - reward: balanced
+  - hardware: local_mac
+  - override hydra/job_logging: disabled
+
+# Project Metadata
+project_name: "ISOTOPE"
+experiment_name: "${now:%Y-%m-%d}_${agent.name}_${environment.grid_size}x${environment.grid_size}"
+
+# Training Parameters
+training:
+  total_episodes: 10000
+  rollout_length: 100
+  batch_size: 64
+  num_epochs: 4
+  checkpoint_interval: 500
+  log_interval: 10
+  eval_interval: 100
+  eval_episodes: 20
+
+# Evaluation Configuration
+evaluation:
+  episodes: 100
+  deterministic: true
+  save_trajectories: false
+  metrics:
+    - success_rate
+    - mean_ppf
+    - ppf_violations
+    - k_effective_deviation
+    - mean_episode_reward
+    - power_homogeneity
+
+# W&B Integration
+wandb:
+  enabled: true
+  project: "ISOTOPE"
+  entity: null  # Set to your W&B username/team
+  tags:
+    - "${agent.name}"
+    - "${environment.grid_size}x${environment.grid_size}"
+  log_physics: true
+  log_core_images: true
+  log_interval: 10
+
+# Visualization
+visualization:
+  render_mode: null  # "human", "rgb_array", or null
+  save_animations: false
+  animation_interval: 100
+
+# Random Seed
+seed: 42
+
+# Hydra Configuration
+hydra:
+  job:
+    chdir: true
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: outputs/sweeps/${now:%Y-%m-%d}
+    subdir: ${hydra.job.num}
