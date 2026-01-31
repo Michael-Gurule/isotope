@@ -1,0 +1,39 @@
+# Hierarchical Multi-Agent PPO Configuration
+name: "hierarchical_mappo"
+algorithm: "MAPPO"
+architecture: "hierarchical"
+
+# Network Architecture
+network:
+  # Master Policy (global strategy)
+  master:
+    hidden_dims: [256, 128]
+    strategy_dim: 16  # Strategy embedding dimension
+    activation: "relu"
+    update_interval: 5  # Update master every N steps
+
+  # Sub-Agent Policies (quadrant controllers)
+  subagent:
+    hidden_dims: [256, 128]
+    activation: "relu"
+    share_weights: true  # Share weights across sub-agents
+
+# PPO Hyperparameters
+hyperparameters:
+  lr: 3.0e-4
+  lr_schedule: "linear"  # "constant", "linear", "cosine"
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_epsilon: 0.2
+  clip_value: true
+  value_clip_epsilon: 0.2
+  entropy_coef: 0.01
+  value_coef: 0.5
+  max_grad_norm: 0.5
+  normalize_advantages: true
+  normalize_rewards: true
+
+# Memory/Buffer
+buffer:
+  size: 2048
+  minibatch_size: 64

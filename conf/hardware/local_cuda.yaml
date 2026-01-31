@@ -1,0 +1,25 @@
+# Local CUDA GPU Configuration
+name: "local_cuda"
+
+# Device Configuration
+device: "cuda"
+num_workers: 8
+pin_memory: true
+
+# Training Parameters
+rollout_fragment_length: 256
+num_envs: 4  # Multiple parallel environments
+
+# Memory Management
+torch_threads: 1  # Let CUDA handle parallelism
+numpy_threads: 4
+
+# Checkpointing
+checkpoint_dir: "checkpoints"
+save_best_only: false
+
+# CUDA-specific
+cuda:
+  deterministic: false
+  benchmark: true
+  device_id: 0

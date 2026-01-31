@@ -1,0 +1,41 @@
+# Progressive Grid Size Curriculum Configuration
+enabled: true
+type: "progressive_grid"
+
+# Curriculum Stages
+stages:
+  - name: "stage_1_4x4"
+    grid_size: 4
+    num_agents: 1
+    physics_complexity: "simple"
+    success_threshold: 0.75  # 75% episodes with PPF < limit
+    min_episodes: 500
+    max_episodes: 2000
+
+  - name: "stage_2_6x6"
+    grid_size: 6
+    num_agents: 2
+    physics_complexity: "simple"
+    success_threshold: 0.70
+    min_episodes: 1000
+    max_episodes: 4000
+
+  - name: "stage_3_8x8"
+    grid_size: 8
+    num_agents: 4
+    physics_complexity: "full"
+    success_threshold: 0.65
+    min_episodes: 2000
+    max_episodes: null  # No limit on final stage
+
+# Advancement Criteria
+advancement:
+  metric: "ppf_under_limit_rate"  # Fraction of episodes with PPF < 1.5
+  window_size: 100  # Rolling window for metric calculation
+  allow_regression: true  # Allow returning to earlier stages
+  regression_threshold: 0.40  # Regress if success rate drops below this
+
+# Stage Transition
+transition:
+  warmup_episodes: 50  # Episodes before advancement check
+  cooldown_episodes: 100  # Episodes after advancement before next check

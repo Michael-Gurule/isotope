@@ -1,0 +1,23 @@
+# Standard 8x8 PWR reactor core configuration
+name: "reactor_8x8"
+grid_size: 8
+max_steps: 100
+
+# Agent Configuration
+num_agents: 4
+agent_assignment: "quadrant"  # One agent per quadrant
+
+# Fuel Assembly Inventory
+fuel_inventory:
+  fresh_enrichment: 0.05  # 5% U-235
+  fresh_count: 24
+  used_enrichment: 0.03  # 3% U-235
+  used_count: 20
+  used_burnup_min: 10000.0  # MWd/MTU
+  used_burnup_max: 25000.0
+  depleted_enrichment: 0.01  # 1% U-235
+  depleted_count: 20
+  depleted_burnup_min: 30000.0
+  depleted_burnup_max: 45000.0
+
+# Total: 64 assemblies for 8x8 grid
